@@ -1,0 +1,37 @@
+﻿@page
+@model MovieScheduleApp.Pages.Movies.IndexModel
+
+<h1>Movie Schedule</h1>
+
+<p>
+    <a asp-page="/Movies/Create" class="btn btn-primary">Add New Movie</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Genre</th>
+            <th>Description</th>
+            <th>Showtimes</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model.Movies)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Director</td>
+                <td>@movie.Genre</td>
+                <td>@movie.Description</td>
+                <td>@string.Join(", ", movie.Showtimes.Select(s => s.StartTime.ToString("g") + " - " + s.Location))</td>
+                <td>
+                    <a asp-page="/Movies/Edit" asp-route-id="@movie.Id" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-page="/Movies/Delete" asp-route-id="@movie.Id" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

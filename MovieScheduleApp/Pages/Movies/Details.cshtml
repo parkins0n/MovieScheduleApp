@@ -1,0 +1,17 @@
+﻿@page "{id:int}"
+@model MovieScheduleApp.Pages.Movies.DetailsModel
+
+<h1>@Model.Movie.Title</h1>
+<p><strong>Director:</strong> @Model.Movie.Director</p>
+<p><strong>Genre:</strong> @Model.Movie.Genre</p>
+<p><strong>Description:</strong> @Model.Movie.Description</p>
+
+<h2>Showtimes</h2>
+<ul>
+    @foreach (var showtime in Model.Movie.Showtimes)
+    {
+        <li>@showtime.StartTime.ToString("g") - @showtime.Location</li>
+    }
+</ul>
+
+<a asp-page="/Movies/Index">Back to list</a>
